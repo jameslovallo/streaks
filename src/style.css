@@ -1,0 +1,11 @@
+:root {
+	--app-bg: #eceff1;
+	background: var(--app-bg);
+	color: #263238;
+	font-family: sans-serif;
+	overflow-x: hidden;
+}
+
+body {
+	margin: 0;
+}

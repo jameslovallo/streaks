@@ -1,0 +1,7 @@
+import './components/habit-list.js'
+import './components/habit.js'
+import './components/heading.js'
+import './components/icon.js'
+import './components/nav.js'
+import './components/progress.js'
+import './pages/home.js'
