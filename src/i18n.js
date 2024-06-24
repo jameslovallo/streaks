@@ -2,7 +2,7 @@ const locales = {
 	en: {
 		today: 'Today',
 		habits: 'Habits',
-		lists: 'Lists',
+		tasks: 'Tasks',
 		youCanDoThis: 'You can do this',
 		thisWeek: 'This week',
 		nextReward: (v) => `Next reward in ${v} days`,
@@ -10,7 +10,7 @@ const locales = {
 	es: {
 		today: 'Hoy',
 		habits: 'Habitos',
-		lists: 'Listas',
+		tasks: 'Tareas',
 		youCanDoThis: 'Puedes hacer esto',
 		thisWeek: 'Esta semana',
 		nextReward: (v) => `Próxima recompensa en ${v} días`,

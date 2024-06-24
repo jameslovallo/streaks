@@ -4,14 +4,13 @@ import { create, html } from '//unpkg.com/cuick-dev'
 create('home', {
 	template: () => html`
 		<h1>${i18n.today}</h1>
-		<p>${i18n.youCanDoThis}</p>
 		<c-heading heading=${i18n.habits}>
 			<button><c-icon name="plus" /></button>
 		</c-heading>
 		<c-habit-list></c-habit-list>
-		<c-heading heading=${i18n.lists}>
+		<c-heading heading=${i18n.tasks}>
 			<button><c-icon name="plus" /></button>
 		</c-heading>
-		<c-task-list></c-task-list>
+		<c-list></c-list>
 	`,
 })
