@@ -1,4 +1,4 @@
-import { updateRecord } from '../api.js'
+import { updateRecord } from '../src/api.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 create('habit', {

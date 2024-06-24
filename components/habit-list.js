@@ -1,4 +1,4 @@
-import { getRecords, updateRecord } from '../api.js'
+import { getRecords, updateRecord } from '../src/api.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 const today = new Date().getDay()

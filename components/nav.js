@@ -7,9 +7,11 @@ create('nav', {
 				<button aria-label="Friends" title="Friends">
 					<c-icon name="user" />
 				</button>
-				<select>
-					<option>James</option>
-				</select>
+				<c-select>
+					<select>
+						<option>James</option>
+					</select>
+				</c-select>
 			</div>
 			<div style="gap: 0.5rem">
 				<button aria-label="Add task" title="Add task">
@@ -42,11 +44,6 @@ create('nav', {
 			background: transparent;
 			border: 0;
 			padding: 0.5rem;
-		}
-		select {
-			background: transparent;
-			border: none;
-			padding: 0;
 		}
 		svg {
 			display: block;

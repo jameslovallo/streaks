@@ -4,10 +4,11 @@ create('list', {
 	name: 'Work',
 	template: ({ name }) => html`
 		<div>
-			<button>
-				${name}
-				<c-icon name="chevronDown" size="20" />
-			</button>
+			<c-select>
+				<select>
+					<option>${name}</option>
+				</select>
+			</c-select>
 			<button>
 				<c-icon name="checkAll" size="20" />
 			</button>
@@ -25,9 +26,11 @@ create('list', {
 								<div>
 									Task Name
 									<small>
-										<select>
-											<option>Category (datalist?)</option>
-										</select>
+										<c-select>
+											<select>
+												<option>Category (datalist?)</option>
+											</select>
+										</c-select>
 										<span>Due: Today</span>
 									</small>
 								</div>
@@ -58,9 +61,7 @@ create('list', {
 			border: 0;
 			padding: 0.25rem;
 		}
-		button:first-of-type {
-			align-items: center;
-			display: flex;
+		c-select:first-of-type {
 			margin-right: auto;
 		}
 		ul {
@@ -87,11 +88,6 @@ create('list', {
 			display: flex;
 			font-size: 12px;
 			gap: 1rem;
-		}
-		select {
-			appearance: none;
-			border: 0;
-			padding: 0;
 		}
 	`,
 })

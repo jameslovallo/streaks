@@ -1,4 +1,4 @@
-import icons from '../icons.js'
+import icons from '../src/icons.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 create('icon', {
