@@ -1,4 +1,5 @@
 import { getRecords, updateRecord } from '../src/api.js'
+import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 const today = new Date().getDay()
@@ -24,25 +25,30 @@ response.forEach(({ id, fields: { week, last } }, i) => {
 	}
 })
 
-create('c-habit-list', {
+create('habits', {
 	template: () => {
-		return html`${response.map(
-			({ id, fields: { name, icon, week, streak, last } }) => html`
-				<c-habit
-					id=${id}
-					name=${name}
-					icon=${icon}
-					week=${week}
-					streak=${streak}
-					last=${last}
-				>
-					<img src="https://img.icons8.com/?size=100&id=12975&format=png" />
-				</c-habit>
-			`
-		)}`
+		return html` <c-heading heading=${i18n.habits}>
+				<button><c-icon name="plus" /></button>
+			</c-heading>
+			<div part="grid">
+				${response.map(
+					({ id, fields: { name, icon, week, streak, last } }) => html`
+						<c-habit
+							id=${id}
+							name=${name}
+							icon=${icon}
+							week=${week}
+							streak=${streak}
+							last=${last}
+						>
+							<img src="https://img.icons8.com/?size=100&id=12975&format=png" />
+						</c-habit>
+					`
+				)}
+			</div>`
 	},
 	styles: css`
-		:host {
+		[part='grid'] {
 			display: grid;
 			gap: 2rem;
 			grid-template-columns: repeat(auto-fill, minmax(10ch, 1fr));

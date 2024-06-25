@@ -10,9 +10,13 @@ create('heading', {
 		:host {
 			align-items: center;
 			display: flex;
-			margin: 2.5rem 0 1rem;
+			height: 1.5rem;
+			margin: 3rem 0 1rem;
+			position: relative;
 		}
 		h2 {
+			font-size: 1.5rem;
+			line-height: 1;
 			margin: 0 auto 0 0;
 		}
 		slot::slotted(button) {
