@@ -1,20 +1,37 @@
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 create('select', {
-	template: () => html`<slot /><c-icon name="chevronDown" />`,
+	$label: '',
+	setup({ children, $label }) {
+		$label.value = children[0].value
+		children[0].addEventListener('change', ({ target: { value } }) => {
+			$label.value = value
+		})
+	},
+	template: ({ $label }) => html`
+		<slot />
+		<span>${$label.value}<c-icon name="chevronDown" /></span>
+	`,
 	styles: css`
 		:host {
-			align-items: center;
-			display: flex;
+			display: inline-grid;
+		}
+		slot,
+		span {
+			display: block;
+			grid-area: 1/-1;
 		}
 		slot::slotted(select) {
 			appearance: none;
 			background: none;
 			border: 0;
-			padding: 0 1.25rem 0 0.25rem;
+			outline: 0;
+			opacity: 0;
 		}
-		c-icon {
-			margin-left: -1.25rem;
+		span {
+			align-items: center;
+			display: flex;
+			pointer-events: none;
 		}
 	`,
 })

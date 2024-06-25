@@ -10,12 +10,19 @@ const token =
 export const getRecords = (options) => {
 	const { base, table } = { ...defaults, ...options }
 	return fetch([api, base, table].join('/'), {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
+		headers: { Authorization: `Bearer ${token}` },
 	})
 		.then((r) => r.json())
 		.then((r) => r.records)
+}
+
+export const getTable = (options) => {
+	const { base, table } = { ...defaults, ...options }
+	return fetch([api, 'meta/bases', base, 'tables'].join('/'), {
+		headers: { Authorization: `Bearer ${token}` },
+	})
+		.then((r) => r.json())
+		.then((r) => r.tables.find((t) => t.name === table))
 }
 
 export const updateRecord = (options) => {

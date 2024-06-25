@@ -15,6 +15,6 @@ create('home', {
 		</c-heading>
 		<c-list></c-list>
 		<!-- Gratitude -->
-		<c-heading heading=${i18n.tasks} />
+		<c-heading heading=${i18n.gratitude} />
 	`,
 })

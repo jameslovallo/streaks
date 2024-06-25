@@ -1,12 +1,23 @@
+import { getRecords, getTable } from '../src/api.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
+const taskTable = await getTable({ table: 'Tasks' })
+const tasks = await getRecords({ table: 'Tasks' })
+
+const { choices: categories } = taskTable.fields.find(
+	(f) => f.name === 'category'
+).options
+
+console.log(categories)
+
 create('list', {
-	name: 'Work',
-	template: ({ name }) => html`
+	$filter: 'All',
+	template: ({ $filter }) => html`
 		<div>
 			<c-select>
-				<select>
-					<option>${name}</option>
+				<select @change=${({ target: { value } }) => ($filter.value = value)}>
+					<option>All</option>
+					${categories.map(({ name }) => html`<option>${name}</option>`)}
 				</select>
 			</c-select>
 			<button>
@@ -17,27 +28,33 @@ create('list', {
 			</button>
 		</div>
 		<ul>
-			${Array(5)
-				.fill()
-				.map(
-					(_) =>
-						html`
+			${tasks.map(({ id, fields: { name, category, due } }) => {
+				const date = () => {
+					const todayEpoch = Math.floor(new Date() / 8.64e7)
+					if (due === todayEpoch) {
+						return 'Today'
+					} else if (due < todayEpoch - 1) {
+						return 'Overdue'
+					} else {
+						const d = new Date(due * 8.64e7)
+						return d.getMonth() + 1 + '/' + d.getDate()
+					}
+				}
+				return ['All', category].includes($filter.value)
+					? html`
 							<li>
 								<div>
-									Task Name
+									${name}
 									<small>
-										<c-select>
-											<select>
-												<option>Category (datalist?)</option>
-											</select>
-										</c-select>
-										<span>Due: Today</span>
+										<span>${category}</span>
+										<span>Due: ${date()}</span>
 									</small>
 								</div>
 								<c-icon name="check" size="20" />
 							</li>
-						`
-				)}
+					  `
+					: html``
+			})}
 		</ul>
 	`,
 	styles: css`
@@ -86,6 +103,7 @@ create('list', {
 		li > div > small {
 			color: #546e7a;
 			display: flex;
+			font-family: monospace;
 			font-size: 12px;
 			gap: 1rem;
 		}
