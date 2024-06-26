@@ -7,5 +7,6 @@ create('home', {
 		<c-habits />
 		<c-tasks />
 		<c-gratitude />
+		<c-meditation />
 	`,
 })

@@ -38,13 +38,13 @@ export const updateRecord = (options) => {
 }
 
 export const addRecord = (options) => {
-	const { base, table, records } = { ...defaults, ...options }
+	const { base, table, fields } = { ...defaults, ...options }
 	fetch([api, base, table].join('/'), {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ records }),
+		body: JSON.stringify({ fields }),
 	})
 }

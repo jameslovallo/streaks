@@ -27,7 +27,8 @@ response.forEach(({ id, fields: { week, last } }, i) => {
 
 create('habits', {
 	template: () => {
-		return html` <c-heading heading=${i18n.habits}>
+		return html`
+			<c-heading heading=${i18n.habits}>
 				<button><c-icon name="plus" /></button>
 			</c-heading>
 			<div part="grid">
@@ -40,12 +41,11 @@ create('habits', {
 							week=${week}
 							streak=${streak}
 							last=${last}
-						>
-							<img src="https://img.icons8.com/?size=100&id=12975&format=png" />
-						</c-habit>
+						/>
 					`
 				)}
-			</div>`
+			</div>
+		`
 	},
 	styles: css`
 		[part='grid'] {

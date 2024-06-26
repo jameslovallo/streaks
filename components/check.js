@@ -27,10 +27,11 @@ create('check', {
 		c-icon {
 			pointer-events: none;
 		}
-		input:hover:not(:checked) {
+		input:hover {
 			background: #b9f6ca;
+			border-color: #00c853;
 		}
-		input:hover:not(:checked) + c-icon {
+		input:hover + c-icon {
 			color: #00c853;
 		}
 		input:checked {

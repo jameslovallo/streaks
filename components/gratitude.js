@@ -1,7 +1,8 @@
+import { addRecord, getRecords } from '../src/api.js'
 import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
-const items = []
+const items = await getRecords({ table: 'Gratitude' })
 
 create('gratitude', {
 	$itemCount: items.length,
@@ -11,13 +12,18 @@ create('gratitude', {
 			<c-input
 				placeholder=${i18n.gratitudePrompt}
 				@enter=${({ detail }) => {
-					items.push(detail)
+					items.push({ fields: { name: detail } })
 					$itemCount.value = items.length
+					addRecord({
+						table: 'Gratitude',
+						fields: { name: detail },
+					})
 				}}
 			/>
 			<ol data-item-count=${$itemCount.value}>
-				${items.map((item) => html`<li>${item}</li>`)}
-				${!items.length ? html`<li />` : ''}
+				${!items.length
+					? html`<li />`
+					: items.map(({ fields: { name } }) => html`<li>${name}</li>`)}
 			</ol>
 		</c-card>
 	`,
