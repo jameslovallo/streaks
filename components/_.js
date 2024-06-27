@@ -1,3 +1,4 @@
+import './bible.js'
 import './card.js'
 import './check.js'
 import './gratitude.js'
@@ -11,3 +12,4 @@ import './nav.js'
 import './progress.js'
 import './select.js'
 import './tasks.js'
+

@@ -1,8 +1,20 @@
-import { addRecord, getRecords } from '../src/api.js'
+import {
+	addRecord,
+	deleteRecord,
+	getRecords,
+	todayEpoch,
+	toEpochDay,
+} from '../src/api.js'
 import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 const items = await getRecords({ table: 'Gratitude' })
+items.forEach(({ id, createdTime }) => {
+	const date = toEpochDay(createdTime)
+	if (todayEpoch > date) {
+		deleteRecord({ table: 'Gratitude', id })
+	}
+})
 
 create('gratitude', {
 	$itemCount: items.length,

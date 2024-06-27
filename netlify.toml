@@ -3,3 +3,7 @@
 [[edge_functions]]
 function = "saa"
 path = "/saa"
+
+[[edge_functions]]
+function = "bible"
+path = "/bible"

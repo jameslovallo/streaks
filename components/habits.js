@@ -1,4 +1,4 @@
-import { getRecords, updateRecord } from '../src/api.js'
+import { getRecords, todayEpoch, updateRecord } from '../src/api.js'
 import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
@@ -18,7 +18,6 @@ response.forEach(({ id, fields: { week, last } }, i) => {
 		}
 	}
 	// check days since last completion
-	const todayEpoch = Math.floor(new Date() / 8.64e7)
 	if (last && todayEpoch - last > 1) {
 		response[i].fields.streak = 0
 		updateRecord({ table: 'Habits', id, fields: { streak: 0, last: null } })

@@ -1,4 +1,9 @@
+export const toEpochDay = (d) => Math.floor(new Date(d) / 8.64e7)
+export const fromEpochDay = (d) => new Date(d * 8.64e7)
+export const todayEpoch = toEpochDay(new Date())
+
 const api = 'https://api.airtable.com/v0'
+
 const defaults = {
 	base: 'appQUkCToplaX7tgp',
 	table: 'tbllOILS4y1oobsEt',
@@ -46,5 +51,13 @@ export const addRecord = (options) => {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({ fields }),
+	})
+}
+
+export const deleteRecord = (options) => {
+	const { base, table, id } = { ...defaults, ...options }
+	fetch([api, base, table, id].join('/'), {
+		method: 'DELETE',
+		headers: { Authorization: `Bearer ${token}` },
 	})
 }

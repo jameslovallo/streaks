@@ -1,4 +1,4 @@
-import { updateRecord } from '../src/api.js'
+import { todayEpoch, updateRecord } from '../src/api.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 create('habit', {
@@ -10,7 +10,6 @@ create('habit', {
 	last: 0,
 	template({ id, name, icon, week, streak, last }) {
 		const today = new Date().getDay()
-		const todayEpoch = Math.floor(new Date() / 8.64e7)
 		const weekArray = week ? JSON.parse(week) : []
 		const update = () => {
 			this.week = JSON.stringify(weekArray)

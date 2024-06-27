@@ -1,8 +1,7 @@
-import { getRecords, getTable } from '../src/api.js'
+import { fromEpochDay, getRecords, getTable, todayEpoch } from '../src/api.js'
 import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
-const todayEpoch = Math.floor(new Date() / 8.64e7)
 const taskTable = await getTable({ table: 'Tasks' })
 const tasks = await getRecords({ table: 'Tasks' })
 
@@ -43,7 +42,7 @@ create('tasks', {
 						} else if (due < todayEpoch - 1) {
 							return 'Overdue'
 						} else {
-							const d = new Date(due * 8.64e7)
+							const d = fromEpochDay(due)
 							const day = d.toLocaleString('default', { weekday: 'long' })
 							return day + ', ' + (d.getMonth() + 1) + '/' + d.getDate()
 						}
@@ -92,14 +91,13 @@ create('tasks', {
 		}
 		li > div {
 			display: grid;
-			font-size: 14px;
 			gap: 0.25rem;
 		}
 		li > div > small {
 			color: #546e7a;
 			display: flex;
 			font-family: monospace;
-			font-size: 12px;
+			font-size: 14px;
 			gap: 1rem;
 		}
 		li > div > small > span {
