@@ -29,10 +29,13 @@ create('bible', {
 						},
 					},
 				} = json
+				const [book, chapter] = usfm[0].split('.')
+				const ref = `/${version_id}/${book}.${chapter}`
 				$vodImage.value = verseOfTheDayImageURL
 				$vod.value = content
 				$vodRef.value = human
-				$chapterLink.value = `${bibleRoot}/bible/${version_id}/${usfm}`
+				$chapterLink.value = `${bibleRoot}/bible${ref}`
+				$chapterAudioLink.value = `${bibleRoot}/audio-bible${ref}`
 			})
 	},
 	template: ({
