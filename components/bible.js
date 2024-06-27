@@ -1,3 +1,4 @@
+import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 create('bible', {
@@ -28,36 +29,44 @@ create('bible', {
 	template: ({ $vodImage, $vod, $vodRef, $vodLink }) => html`
 		<c-heading heading="Bible" />
 		<c-card>
-			<img src=${$vodImage.value} />
-			<div>
-				<div>
+			<div part="vod">
+				<img src=${$vodImage.value} />
+				<div part="vod-content">
 					<h3>${$vodRef.value}</h3>
-					<a href=${$vodLink.value} target="_blank">Read More</a>
+					<p>${$vod.value}</p>
 				</div>
-				<p>${$vod.value}</p>
+			</div>
+			<div part="actions">
+				<a href=${$vodLink.value}>${i18n.readMore}</a>
+				<a href="https://www.bible.com/users/lovalloj/reading-plans">
+					${i18n.plans}
+				</a>
 			</div>
 		</c-card>
 	`,
 	styles: css`
 		c-card {
-			display: grid;
 			gap: 1.5rem;
 		}
 		img {
-			border: 1px solid #cfd8dc;
 			border-radius: 0.75rem;
 			width: 100px;
 		}
-		div {
-			display: grid;
+		[part='vod'] {
+			align-items: end;
+			display: flex;
 			gap: 1rem;
 		}
-		div > div {
-			align-items: baseline;
+		[part='vod-content'] {
+			display: grid;
+			gap: 0.5rem;
+		}
+		[part='actions'] {
 			display: flex;
 			gap: 1rem;
 		}
 		h3,
+		h4,
 		p {
 			margin: 0;
 		}

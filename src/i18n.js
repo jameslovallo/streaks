@@ -6,6 +6,9 @@ const locales = {
 		addTask: 'Add Task',
 		gratitude: 'Gratitude',
 		gratitudePrompt: "I'm grateful for...",
+		spendTime: "Spend time in God's word",
+		readMore: 'Read More',
+		plans: 'My Reading Plans',
 	},
 	es: {
 		today: 'Hoy',
@@ -14,6 +17,9 @@ const locales = {
 		addTask: 'Anadir Tarea',
 		gratitude: 'Agradecimientos',
 		gratitudePrompt: 'Estoy agradecido por...',
+		spendTime: 'Gastar tiempo en la palabra de Dios',
+		readMore: 'Leer Mas',
+		plans: 'Mis planes de lectura',
 	},
 }
 
