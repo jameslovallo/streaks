@@ -37,7 +37,10 @@ create('bible', {
 				</div>
 			</div>
 			<div part="actions">
-				<a href=${$vodLink.value}>${i18n.readMore}</a>
+				<a href=${$vodLink.value}>
+					<c-icon name="bible" />
+					${i18n.readMore}
+				</a>
 				<a href="https://www.bible.com/users/lovalloj/reading-plans">
 					${i18n.plans}
 				</a>
