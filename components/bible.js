@@ -2,71 +2,87 @@ import { i18n } from '../src/i18n.js'
 import { create, css, html } from '//unpkg.com/cuick-dev'
 
 create('bible', {
+	$vodImage: '',
 	$vod: '',
 	$vodRef: '',
-	$vodLink: '',
-	$vodImage: '',
-	setup({ $vod, $vodRef, $vodLink, $vodImage }) {
+	$chapterLink: '',
+	$chapterAudioLink: '',
+	setup({ $vodImage, $vod, $vodRef, $chapterLink, $chapterAudioLink }) {
+		const bibleRoot = 'https://www.bible.com'
+		const parser = new DOMParser()
 		fetch('/bible')
-			.then((res) => res.json())
-			.then(
-				({
-					pageProps: {
-						verseOfTheDayImageURL,
-						verseOfTheDay: {
-							content,
-							reference: { human },
+			.then((res) => res.text())
+			.then((text) => {
+				const doc = parser.parseFromString(text, 'text/html')
+				const data = doc.querySelector('#__NEXT_DATA__').textContent
+				const json = JSON.parse(data)
+				// https://www.bible.com/bible/111/1PE.5.NIV
+				// https://www.bible.com/audio-bible/111/1PE.5.NIV
+				const {
+					props: {
+						pageProps: {
+							verseOfTheDay: {
+								content,
+								reference: { human, usfm, version_id },
+							},
+							verseOfTheDayImageURL,
 						},
 					},
-				}) => {
-					$vodImage.value = verseOfTheDayImageURL
-					$vod.value = content
-					$vodRef.value = human
-					$vodLink.value = 'https://www.bible.com/verse-of-the-day'
-				}
-			)
+				} = json
+				$vodImage.value = verseOfTheDayImageURL
+				$vod.value = content
+				$vodRef.value = human
+				$chapterLink.value = `${bibleRoot}/bible/${version_id}/${usfm}`
+			})
 	},
-	template: ({ $vodImage, $vod, $vodRef, $vodLink }) => html`
+	template: ({
+		$vodImage,
+		$vod,
+		$vodRef,
+		$chapterLink,
+		$chapterAudioLink,
+	}) => html`
 		<c-heading heading="Bible" />
 		<c-card>
-			<div part="vod">
+			<header>
 				<img src=${$vodImage.value} />
-				<div part="vod-content">
+				<div>
 					<h3>${$vodRef.value}</h3>
-					<p>${$vod.value}</p>
+					<div>
+						<a href=${$chapterLink.value} target="_blank">
+							<c-icon name="bible" size="16" />
+							${i18n.read}
+						</a>
+						<a href=${$chapterAudioLink.value} target="_blank">
+							<c-icon name="play" size="20" />
+							${i18n.listen}
+						</a>
+					</div>
 				</div>
-			</div>
-			<div part="actions">
-				<a href=${$vodLink.value}>
-					<c-icon name="bible" />
-					${i18n.readMore}
-				</a>
-				<a href="https://www.bible.com/users/lovalloj/reading-plans">
-					${i18n.plans}
-				</a>
-			</div>
+			</header>
+			<p>${$vod.value}</p>
 		</c-card>
 	`,
 	styles: css`
 		c-card {
 			gap: 1.5rem;
 		}
+		header {
+			align-items: end;
+			display: grid;
+			gap: 1rem;
+			grid-template-columns: 10ch 1fr;
+		}
 		img {
 			border-radius: 0.75rem;
-			width: 100px;
 		}
-		[part='vod'] {
-			align-items: end;
-			display: flex;
-			gap: 1rem;
-		}
-		[part='vod-content'] {
+		header > div {
 			display: grid;
 			gap: 0.5rem;
 		}
-		[part='actions'] {
+		header > div > div {
 			display: flex;
-			gap: 1rem;
+			gap: 0.5rem;
 		}
 		h3,
 		h4,
@@ -74,6 +90,14 @@ create('bible', {
 			margin: 0;
 		}
 		a {
+			align-items: center;
+			background: var(--app-bg);
+			color: black;
+			border-radius: 0.25rem;
+			display: flex;
+			font-size: 1rem;
+			gap: 0.5rem;
+			padding: 0.25rem 0.75rem 0.25rem 0.5rem;
 			text-decoration: none;
 		}
 	`,

@@ -49,7 +49,7 @@ create('habits', {
 	styles: css`
 		[part='grid'] {
 			display: grid;
-			gap: 2rem;
+			gap: 1rem;
 			grid-template-columns: repeat(auto-fill, minmax(10ch, 1fr));
 			justify-content: center;
 		}

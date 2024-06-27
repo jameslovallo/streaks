@@ -83,6 +83,7 @@ create('habit', {
 		}
 		input {
 			appearance: none;
+			border-radius: 50%;
 			cursor: pointer;
 		}
 		label {
